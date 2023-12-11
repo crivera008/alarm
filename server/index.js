@@ -52,17 +52,16 @@ function in_seconds(time) {
     minutes2 = parseInt(minutes);
     const d = new Date();
     var currDay = d.getDate();
-    const currHour = d.getHours();
-    const currMin = d.getMinutes();
-    if (hours2 < currHour || (hours2 == currHour && minutes2 < currMin)) {
-        currDay += 1;
-    }
     month = d.getMonth() + 1
     var date_string = d.getFullYear() + "-" + month + "-" + currDay + "T" + hours + ":" + minutes + ":00.000"
     console.log(date_string);
     var d2 = new Date(date_string); 
-    console.log(Math.floor(d2 / 1000));
-    return Math.floor(d2 / 1000);
+    alarm_secs = Math.floor(d2 / 1000);
+    curr_secs = Math.floor((Date.now() - (5 * 60 * 60 * 1000)) / 1000)
+    if (alarm_secs < curr_secs) {
+        alarm_secs += 24 * 60 * 60;
+    }
+    return alarm_secs;
 }
 
 app.get('/all-settings-user', (req, res) => {
