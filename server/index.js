@@ -61,6 +61,7 @@ function in_seconds(time) {
     var date_string = d.getFullYear() + "-" + month + "-" + currDay + "T" + hours + ":" + minutes + ":00.000-05:00"
     console.log(date_string);
     var d2 = new Date(date_string); 
+    console.log(Math.floor(d2 / 1000));
     return Math.floor(d2 / 1000);
 }
 
@@ -77,7 +78,7 @@ app.get('/all-settings', (req, res) => {
         alarm: in_seconds(currAlarm),
         snooze: currSnooze,
         songname: currFileName,
-        secs: Math.floor(Date.now() / 1000)
+        secs: Math.floor((Date.now() - (5 * 60 * 60 * 1000)) / 1000)
     });
   });
 
