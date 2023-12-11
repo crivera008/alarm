@@ -83,11 +83,7 @@ app.get('/all-settings', (req, res) => {
   app.get('/download-wav', (req, res) => {
     const uploadFolder = path.join(__dirname, '/uploads/');
     const file = fs.readdirSync(uploadFolder)[0];
-    console.log(file);
-    res.json({
-        file_path: file
-    });
-    //res.sendFile(path.join(uploadFolder, file));
+    res.sendFile(path.join(uploadFolder, file));
   });
 
 app.get('/weather', (req, res) => {
