@@ -58,7 +58,7 @@ function in_seconds(time) {
         currDay += 1;
     }
     month = d.getMonth() + 1
-    var date_string = d.getFullYear() + "-" + month + "-" + currDay + "T" + hours + ":" + minutes + ":00.000-05:00"
+    var date_string = d.getFullYear() + "-" + month + "-" + currDay + "T" + hours + ":" + minutes + ":00.000"
     console.log(date_string);
     var d2 = new Date(date_string); 
     console.log(Math.floor(d2 / 1000));
