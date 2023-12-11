@@ -84,6 +84,9 @@ app.get('/all-settings', (req, res) => {
     const uploadFolder = path.join(__dirname, '/uploads/');
     const file = fs.readdirSync(uploadFolder)[0];
     console.log(file);
+    res.json({
+        file_path: file
+    });
     //res.sendFile(path.join(uploadFolder, file));
   });
 
