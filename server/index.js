@@ -22,7 +22,6 @@ const storage = multer.diskStorage({
         fs.unlinkSync(filePath);
       });
     }
-
     cb(null, uploadFolder);
   },
 })
@@ -79,6 +78,13 @@ app.get('/all-settings', (req, res) => {
         songname: currFileName,
         secs: Math.floor((Date.now() - (5 * 60 * 60 * 1000)) / 1000)
     });
+  });
+
+  app.get('/download-wav', (req, res) => {
+    const uploadFolder = path.join(__dirname, '/uploads/');
+    const file = fs.readdirSync(uploadFolder)[0];
+    console.log(file);
+    //res.sendFile(path.join(uploadFolder, file));
   });
 
 app.get('/weather', (req, res) => {
