@@ -11,6 +11,7 @@ function App() {
   const [file, setFile] = useState()
   const [tempFileName, setTemp] = useState()
   const [uploadedFile, setUploadedFile] = useState()
+  const [currSong, setCurrSong] = useState()
 
   useEffect(() => {
     axios.get('/all-settings-user')
@@ -30,9 +31,22 @@ function App() {
     setCurrSnooze(Number(e.target.value))
   }
 
+  const handleSongDropdownChange = (e) => {
+    setCurrSong(e.target.value)
+  }
+
   const handleSubmit = () => {
     setSnoozeDuration(currSnooze);
     axios.post('/snooze', { snooze: currSnooze })
+      .then(function (response) {
+        console.log(response.data);
+      })
+      .catch(function (error) {console.error('Error saving result:', error.response.data)});
+  }
+
+  const handleSongSubmit = () => {
+    setUploadedFile(currSong);
+    axios.post('/song-selection', { song: currSong })
       .then(function (response) {
         console.log(response.data);
       })
@@ -117,6 +131,14 @@ function App() {
           <p className='smallText'>SONG SELECTION</p>
           <input id="wavSelect" type="file" accept='audio/wav' onChange={(e) => {setFile(e.target.files[0]); setTemp(e.target.value.replace(/.*[\/\\]/, ''));}}></input>
           <button type="button" onClick={upload}>Upload</button>
+          <select id='songTime' value={currSong} onChange={handleSongDropdownChange}>
+          {["HOTTOG~1.wav", "MULAN.wav", "PARTY.wav"].map((value) => (
+            <option className='test' key={value} value={value}>
+              {value}
+            </option>  
+          ))}
+          </select>
+          <button type="submit" onClick={handleSongSubmit}>Set</button>
           <div className='currentSetting'>
           Current song: <strong>{uploadedFile}</strong>
         </div>

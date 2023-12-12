@@ -107,10 +107,17 @@ app.post('/snooze', (req, res) => {
     res.send(message);
 });
 
+app.post('/song-selection', (req, res) => {
+  console.log(req.body);
+  currFileName = req.body.song;
+  message = "Selected song: " + res.body.song;
+  res.send(message);
+});
+
 app.post('/alarm', (req, res) => {
     currAlarm = req.body.alarm;
     console.log(currAlarm);
-    message = 'Alarm time saved successfully: ' + currAlarm
+    message = 'Alarm time saved successfully: ' + currAlarm;
     res.send(message);
 });
 
