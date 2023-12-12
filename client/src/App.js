@@ -132,7 +132,7 @@ function App() {
           <input id="wavSelect" type="file" accept='audio/wav' onChange={(e) => {setFile(e.target.files[0]); setTemp(e.target.value.replace(/.*[\/\\]/, ''));}}></input>
           <button type="button" onClick={upload}>Upload</button>
           <select id='songTime' value={currSong} onChange={handleSongDropdownChange}>
-          {["HOTTOG~1.wav", "MULAN.wav", "PARTY.wav"].map((value) => (
+          {["MULAN.wav", "HOTTOG~1.wav", "PARTY.wav"].map((value) => (
             <option className='test' key={value} value={value}>
               {value}
             </option>  
